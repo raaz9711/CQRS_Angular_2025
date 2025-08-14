@@ -26,57 +26,22 @@ builder.Services.AddCors(opt =>
 });
 
 
+
 var app = builder.Build();
 
+app.UseCors("Spa");
+
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-// }
+}
 
 //app.UseHttpsRedirection();
 
-app.UseCors("Spa");
 app.MapControllers();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-// app.MapGet("/weatherforecast", () =>
-// {
-//     var forecast =  Enumerable.Range(1, 5).Select(index =>
-//         new WeatherForecast
-//         (
-//             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//             Random.Shared.Next(-20, 55),
-//             summaries[Random.Shared.Next(summaries.Length)]
-//         ))
-//         .ToArray();
-//     return forecast;
-// })
-// .WithName("GetWeatherForecast")
-// .WithOpenApi();
-
-// Minimal, optional quick endpoints via MediatR:
-app.MapGet("/health", () => "OK");
-app.MapGet("/products", async (IMediator m) => Results.Ok(await m.Send(new GetProductsQuery())));
-app.MapGet("/products/{id:int}", async (int id, IMediator m) =>
-{
-    var p = await m.Send(new GetProductByIdQuery(id));
-    return p is null ? Results.NotFound() : Results.Ok(p);
-});
-app.MapPost("/products", async (CreateProductCommand cmd, IMediator m) =>
-{
-    var id = await m.Send(cmd);
-    return Results.Created($"/products/{id}", new { id });
-});
 
 app.Run();
 
-// record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-// {
-//     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-// }

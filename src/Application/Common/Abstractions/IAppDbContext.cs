@@ -9,4 +9,6 @@ public interface IAppDbContext
 {
     DbSet<Product> Products { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+     DbSet<User> Users { get; }        // add this
 }
