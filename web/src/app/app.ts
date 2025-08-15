@@ -11,23 +11,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.css'
 })
 export class App {
-  private api = inject(ProductService);
-  products = signal<Product[]>([]);
-  name = '';
-  price: number | null = null;
+  // private api = inject(ProductService);
+  // products = signal<Product[]>([]);
+  // name = '';
+  // price: number | null = null;
 
-  constructor() {
-    this.load();
-  }
+  // constructor() {
+  //   this.load();
+  // }
 
-  load() {
-    this.api.list().subscribe(p => this.products.set(p));
-  }
+  // load() {
+  //   this.api.list().subscribe(p => this.products.set(p));
+  // }
 
-  add() {
-    if (!this.name || this.price == null) return;
-    this.api.create({ name: this.name, price: this.price }).subscribe(_ => {
-      this.name = ''; this.price = null; this.load();
-    });
-  }
+  // add() {
+  //   if (!this.name || this.price == null) return;
+  //   this.api.create({ name: this.name, price: this.price }).subscribe(_ => {
+  //     this.name = ''; this.price = null; this.load();
+  //   });
+  // }
 }

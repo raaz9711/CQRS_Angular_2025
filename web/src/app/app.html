@@ -1,13 +1,1 @@
-<h2>Products</h2>
-
-<form (ngSubmit)="add()">
-  <input [(ngModel)]="name" name="name" placeholder="Name" />
-  <input [(ngModel)]="price" name="price" type="number" step="0.01" placeholder="Price" />
-  <button type="submit">Add</button>
-</form>
-
-<ul>
-  <li *ngFor="let p of products()">
-    #{{p.id}} — {{p.name}} — {{p.price}} — {{p.createdUtc | date:'short'}}
-  </li>
-</ul>
+<router-outlet></router-outlet>

@@ -1,0 +1,32 @@
+<form [formGroup]="addEditUser" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+        <label>Name:</label>
+    <input type="name" formControlName="name" />
+    @if(addEditUser.get('name')?.invalid && addEditUser.get('name')?.touched)
+   {
+    <div >
+        @if(addEditUser.get('name')?.errors?.['required'])
+        {
+      <small>Name is required</small>
+
+        }
+ </div>
+   }
+  </div>
+  <div class="mb-3">
+      <label>Email:</label>
+    <input type="email" formControlName="email" />
+    @if(addEditUser.get('email')?.invalid && addEditUser.get('email')?.touched){
+    <div>
+        @if(addEditUser.get('email')?.errors?.['required']){
+      <small >Email is required</small>
+        }
+@if(addEditUser.get('email')?.errors?.['email']){
+      <small>Invalid email</small>
+
+}
+    </div>
+}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

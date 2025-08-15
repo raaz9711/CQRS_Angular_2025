@@ -1,0 +1,42 @@
+    <!-- public int Id { get; set; }
+    public required string Name { get; set; }
+    public required string Email { get; set; }
+    public bool IsActive { get; set; } = true;
+    public DateTime CreatedUtc { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedUtc { get; set; } -->
+
+@if(!isAddEdit){
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Active</th>
+      <th scope="col">Created On</th>
+      <th scope="col"><button class="btn btn-primary" (click)="onAddEdit()"> Add New User</button></th>
+
+    </tr>
+  </thead>
+  <tbody>
+    @for (r of rows; track $index) {
+    <tr>
+      <th scope="row">{{r.id}}</th>
+      <td>{{r.name}}</td>
+      <td>{{r.email}}</td>
+      <td>{{r.isActive === true ? 'Active' : 'Inactive'}}</td>
+      <td>{{r.createdUtc | date:'short'}}</td>
+      <td><button (click)="onAddEdit(r.id)" class="btn btn-primary">Edit</button>
+        &nbsp;
+        <button (click)="onDelete(r.id)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+
+    }
+
+  </tbody>
+</table>
+}
+@if(isAddEdit){
+    <app-add-user (saveForm)="showTable($event)" [user] = "user"></app-add-user>
+}
